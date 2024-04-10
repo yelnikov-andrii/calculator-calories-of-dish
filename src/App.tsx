@@ -1,24 +1,24 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Main } from './components/Main/Main';
+import { Header } from './components/Header/Header';
+import { getProductsFromLocalStorage } from './helpers/saveDataToLocaleStorage';
+import { useDispatch } from 'react-redux';
+import { getProducts } from './store/productsSlice';
 
 function App() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+  const str: any = getProductsFromLocalStorage();
+  dispatch(getProducts(JSON.parse(str)))
+  }, []);
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Main />
     </div>
   );
 }
