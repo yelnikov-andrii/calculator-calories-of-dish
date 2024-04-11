@@ -12,7 +12,10 @@ function App() {
 
   React.useEffect(() => {
   const str: any = getProductsFromLocalStorage();
-  dispatch(getProducts(JSON.parse(str)))
+  if (str) {
+    dispatch(getProducts(JSON.parse(str)));
+  }
+
   }, []);
   
   return (
